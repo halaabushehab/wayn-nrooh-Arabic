@@ -1,4 +1,8 @@
+
+
+
 // const mongoose = require("mongoose");
+// const mongoosePaginate = require('mongoose-paginate-v2');
 
 // const placeSchema = new mongoose.Schema({
 //   name: { type: String, required: true },
@@ -28,11 +32,21 @@
 //     enum: ["pending", "approved", "rejected"], 
 //     default: "pending" 
 //   }, // حالة المكان: معلق، موافق عليه، مرفوض
-//   isDeleted: { type: Boolean, default: false } // ✅ الحقل الجديد للحذف الناعم
+//   isDeleted: { type: Boolean, default: false }, // ✅ الحقل الجديد للحذف الناعم
+//   createdBy: { 
+//     type: mongoose.Schema.Types.ObjectId, 
+//     ref: "User", // هنا نشير إلى نموذج المستخدم الذي أنشأ المكان
+//     required: true 
+//   }
 // }, { timestamps: true });
+
+// placeSchema.plugin(mongoosePaginate);
 
 // const Place = mongoose.model("Place", placeSchema);
 // module.exports = Place;
+
+
+
 
 
 
@@ -40,8 +54,9 @@ const mongoose = require("mongoose");
 const mongoosePaginate = require('mongoose-paginate-v2');
 
 const placeSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  short_description: { type: String, required: true }, 
+  name_ar: { type: String, required: true },
+  name_en: { type: String, required: true },
+    short_description: { type: String, required: true }, 
   detailed_description: { type: String, required: true }, 
   city: { type: String, required: true },
   location: {

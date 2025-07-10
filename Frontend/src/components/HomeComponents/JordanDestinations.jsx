@@ -21,7 +21,7 @@ function JordanGallery() {
     {
       title: "GAMENATION",
       description: "مركز ألعاب ترفيهية يحتوي على ألعاب فيديو وتحديات تفاعلية مميزة.",
-      image: "https://lh3.googleusercontent.com/gps-cs-s/AC9h4nqrrpgiJ_xQZUu-bCcZhLk7G9w7FNB9_WeGnF1NF8gISlwkQxphBBydaJLvs3cuad2X2PBThOjLSA1MfurHEojnal-hi1JHvIStID2ghyPizeGSqRruNkt6StDKHRKahlH70SwQ=s680-w680-h510-rw",  // استبدل بالصورة المناسبة
+      image: "https://lh3.googleusercontent.com/gps-cs-s/AC9h4npN8dOGlEpo5qk1bvZmt6aQCqTJXsXi2wzFvG1dcaY1944__Vl60WKojkQynKaZ-1NItftSPvZWDbrNnCzSWe-uNC0VgaAZ7WZQsDPIstwS_J43AJBmf8Lo8t1zUxblphMEyVSr=s1360-w1360-h1020-rw",  // استبدل بالصورة المناسبة
       location: "عمان"
     },
     {

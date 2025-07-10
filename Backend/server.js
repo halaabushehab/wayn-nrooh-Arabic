@@ -32,6 +32,13 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+// ترجمه===============================================
+app.use((req, res, next) => {
+  app.locals.lang = req.query.lang || 'ar';
+  next();
+});
+
+// ============================================
 app.use(cookieParser());
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
@@ -66,6 +73,11 @@ app.use((req, res, next) => {
   next();
 });
 
+const path = require("path");
+app.use(express.static(path.join(__dirname, "../Frontend/dist"))); // أو build
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../Frontend/dist/index.html"));
+});
 
 // ✅ تشغيل السيرفر
 app.listen(PORT, () => {

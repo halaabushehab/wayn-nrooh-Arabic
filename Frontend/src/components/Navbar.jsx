@@ -9,17 +9,29 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { FileHeart } from "lucide-react";
-
+import { useTranslation } from "react-i18next";
 const Navbar = () => {
   const [isFormOpen, setFormOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-  const [language, setLanguage] = useState('ar');
+  const [language] = useState('ar');
   const userDropdownRef = useRef(null);
   const navigate = useNavigate();
+// ترجمة =================================
+  const { i18n } = useTranslation();
+  const currentLang = i18n.language || 'ar'; // fallback لو ما تم تحديد اللغة
 
+  const toggleLanguage = () => {
+    const newLang = currentLang === 'ar' ? 'en' : 'ar';
+    i18n.changeLanguage(newLang);
+  };
+  useEffect(() => {
+  document.dir = i18n.language === 'ar' ? 'rtl' : 'ltr';
+}, [i18n.language]);
+
+// ============================================================
   useEffect(() => {
     const loadUserFromCookies = () => {
       const userCookie = Cookies.get("user");
@@ -44,17 +56,17 @@ const Navbar = () => {
     loadUserFromCookies();
   }, []);
 
-  const toggleLanguage = () => {
-    const newLanguage = language === 'ar' ? 'en' : 'ar';
-    setLanguage(newLanguage);
-    localStorage.setItem('language', newLanguage);
+  // const toggleLanguage = () => {
+  //   const newLanguage = language === 'ar' ? 'en' : 'ar';
+  //   setLanguage(newLanguage);
+  //   localStorage.setItem('language', newLanguage);
 
-    if (newLanguage === 'en') {
-      navigate('/homeenglish');
-    } else {
-      navigate('/');
-    }
-  };
+  //   if (newLanguage === 'en') {
+  //     navigate('/homeenglish');
+  //   } else {
+  //     navigate('/');
+  //   }
+  // };
 
   const handleLoginSuccess = (userData) => {
     const userToStore = {
@@ -255,17 +267,19 @@ const Navbar = () => {
 
           {/* Desktop User Actions */}
           <div className="hidden lg:flex items-center gap-3">
-            {/* <button
-              onClick={toggleLanguage}
-              className={`flex items-center px-3 py-1.5 md:px-4 md:py-2 rounded transition-colors duration-200 ${
-                isScrolled
-                  ? "bg-transparent text-white border-white hover:bg-white/10"
-                  : "bg-transparent text-white border-white hover:bg-white/10"
-              }`}
-            >
-              <FaGlobe className="ml-2 text-sm md:text-base" />
-              <span className="text-sm md:text-base">{language === 'ar' ? 'English' : 'العربية'}</span>
-            </button> */}
+          <button
+      onClick={toggleLanguage}
+      className={`flex items-center px-3 py-1.5 md:px-4 md:py-2 rounded transition-colors duration-200 ${
+        isScrolled
+          ? "bg-transparent text-white border-white hover:bg-white/10"
+          : "bg-transparent text-white border-white hover:bg-white/10"
+      }`}
+    >
+      <FaGlobe className="ml-2 text-sm md:text-base" />
+      <span className="text-sm md:text-base">
+        {currentLang === 'ar' ? 'English' : 'العربية'}
+      </span>
+    </button>
 
             {user ? (
               <div className="relative" ref={userDropdownRef}>
